@@ -46,12 +46,31 @@ public class AddressBook {
 
     public void editContact() {
         System.out.println("Enter the first name of person to edit contact");
-        String firstName = scanner.next();
-        if (firstName.equalsIgnoreCase(person.getFirstName())) {
+        String editName = scanner.next();
+        if (editName.equalsIgnoreCase(person.getFirstName())) {
             addContact();
         } else {
             System.out.println("The Entered First Name Is Not Match");
             editContact();
+        }
+    }
+
+    /*
+    Declaring Delete Contact Method
+    TO delete The Details Of Contact
+    The Details Of Contact Delete By Using FirstName
+    If First Name Is Match Then Contact Will Delete
+    */
+
+    public void deleteContact() {
+        System.out.println("Enter the first name of person to delete contact");
+        String deleteName = scanner.next();
+        if (deleteName.equalsIgnoreCase(person.getFirstName())) {
+            System.out.println("Deleted " + person.getFirstName() + " details");
+            person = null;
+        } else {
+            System.out.println("The Entered First Name Is Not Match");
+            deleteContact();
         }
     }
     public void printContact() {
