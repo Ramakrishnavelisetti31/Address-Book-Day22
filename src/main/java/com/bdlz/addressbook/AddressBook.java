@@ -23,7 +23,7 @@ public class AddressBook {
             System.out.println("Enter the first name of person");
             String fName = scanner.next();
             if (fName.equals(person.getFirstName())) {
-                System.out.println("The entered person is already exist.");
+                System.out.println("The entered person is already exist. Enter new name");
             } else {
                 System.out.println("Enter the contact details of person ");
                 writeContact();
@@ -62,21 +62,70 @@ public class AddressBook {
     */
 
     public void editContact() {
-        System.out.println("Enter the first name of person to edit contact");
+        System.out.println("Enter firstname of contact you want edit");
         Scanner scanner = new Scanner(System.in);
         String editName = scanner.next();
-        boolean edited = false;
         for (int i = 0; i < contactDetailsList.size(); i++) {
             String name = contactDetailsList.get(i).getFirstName();
             if (name.equalsIgnoreCase(editName)) {
-                contactDetailsList.remove(person);
-                writeContact();
-                edited = true;
-                break;
+                System.out.println("Enter name is exit. you can edit the details");
+                System.out.println("Enter\n 1. To edit all details\n 2. To edit certain detail");
+                int choose = scanner.nextInt();
+                switch (choose) {
+                    case 1:
+                        contactDetailsList.remove(person);
+                        writeContact();
+                        break;
+                    case 2:
+                        System.out.println("Enter\n 1.First Name\n 2.Last Name\n 3.City\n 4.State\n 5.Zip Code\n 6.Phone\n 7.Email");
+                        int option = scanner.nextInt();
+                        switch (option) {
+                            case 1:
+                                System.out.println("Enter new First Name");
+                                String newFirstName = scanner.next();
+                                contactDetailsList.get(i).setFirstName(newFirstName);
+                                break;
+                            case 2:
+                                System.out.println("Enter new Last Name");
+                                String newLastName = scanner.next();
+                                contactDetailsList.get(i).setLastName(newLastName);
+                                break;
+                            case 3:
+                                System.out.println("Enter new City");
+                                String newCity = scanner.next();
+                                contactDetailsList.get(i).setCity(newCity);
+                                break;
+                            case 4:
+                                System.out.println("Enter new State");
+                                String newState = scanner.next();
+                                contactDetailsList.get(i).setState(newState);
+                                break;
+                            case 5:
+                                System.out.println("Enter new ZipCode");
+                                int newZip = scanner.nextInt();
+                                contactDetailsList.get(i).setZipCode(newZip);
+                                break;
+                            case 6:
+                                System.out.println("Enter new Phone Number");
+                                int newPNumber = scanner.nextInt();
+                                contactDetailsList.get(i).setMobileNo(newPNumber);
+                                break;
+                            case 7:
+                                System.out.println("Enter new Email");
+                                String newEmail = scanner.next();
+                                contactDetailsList.get(i).setEmailId(newEmail);
+                                break;
+                            default:
+                                System.out.println("Entered choice is incorrect!.. please enter correct choice");
+                                break;
+                        }
+                    default:
+                        System.out.println("Entered choice is incorrect!.. please enter correct choice");
+                        break;
+                }
+            } else {
+                System.out.println("enter name not exist");
             }
-        }
-        if (!edited) {
-            System.out.println("enter name is incorrect");
         }
     }
 
@@ -88,21 +137,16 @@ public class AddressBook {
     */
 
     public void deleteContact() {
-        System.out.println("Enter the first name of person to delete contact");
+        System.out.println("Enter the first name of contact you want to delete");
         Scanner scanner = new Scanner(System.in);
         String deleteName = scanner.next();
-        int i = 0;
-        for ( ;i < contactDetailsList.size(); i++) {
-            String name = contactDetailsList.get(i).getFirstName();
-            if (name.equalsIgnoreCase(deleteName)) {
-                break;
+        for (int i = 0; i < contactDetailsList.size(); i++) {
+            if (deleteName.equalsIgnoreCase(contactDetailsList.get(i).getFirstName())) {
+                contactDetailsList.remove(i);
+                System.out.println("contact delete successfully");
+            } else {
+                System.out.println("enter name dose not exit");
             }
-        }
-        if (i < contactDetailsList.size()) {
-            contactDetailsList.remove(i);
-            System.out.println("Contact Deleted");
-        }else {
-            System.out.println("Contact not find");
         }
     }
 }
