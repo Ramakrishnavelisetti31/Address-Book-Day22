@@ -90,6 +90,17 @@ public class AddressBook {
 
     }
 
+    /*
+      Declaring Sort Method
+      Sorting The Details Of Contact By Using Names
+      Using Stream method
+     */
+    public void sortByName(){
+        List<ContactDetails> list = contactDetailsList.stream().collect(Collectors.toList());
+        list.stream().sorted((g1, g2) -> ((String)g1.getFirstName()).compareTo(g2.getFirstName()))
+                .forEach(contact -> System.out.println(contact.getFirstName()+" "+contact.getLastName()));
+    }
+
 
     /*
     Declaring The Edit Contact Method
@@ -197,7 +208,8 @@ public class AddressBook {
     public void viewByOptions() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Enter\n 1. By name\n 2. By city\n 3. By state\n 4. Count Contacts\n 0. for previous menu");
+            System.out.println("Enter\n 1. By name\n 2. By city\n 3. By state\n 4. Count Contacts\n" +
+                    "5. Sort the entries Alphabetically\n 0. for previous menu");
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
@@ -220,6 +232,9 @@ public class AddressBook {
                     System.out.println("Enter The Name Of City");
                     String cityName = scanner.next();
                     countContactsByUsingCity(cityName);
+                case 5:
+                    sortByName();
+                    break;
                 case 0:
                     return;
                 default:
