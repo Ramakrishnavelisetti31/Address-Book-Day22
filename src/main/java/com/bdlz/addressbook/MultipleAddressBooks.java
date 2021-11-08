@@ -30,7 +30,8 @@ public class MultipleAddressBooks {
         if (addressBookMap.containsKey(bookName)) {
             addressBookMap.get(bookName);
             System.out.println("Enter book is present choose the options below to do certain function");
-                System.out.println("Enter\n 1. add Contact\n 2. edit contact\n 3. delete contact");
+            while (true) {
+                System.out.println("Enter\n 1. add Contact\n 2. edit contact\n 3. delete contact\n 4. previous menu");
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
@@ -42,12 +43,14 @@ public class MultipleAddressBooks {
                     case 3:
                         addressBookMap.get(bookName).deleteContact();
                         break;
+                    case 4:
+                        return;
                     default:
                         System.out.println("Entered choice is incorrect!.. please enter correct choice");
-                        break;
                 }
             }
         }
+    }
 
     public void deleteBook() {
         System.out.println("Enter the name of Address book to delete.");
